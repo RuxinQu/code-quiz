@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Quiz</title>
+    <link href="../css/style.css" rel="stylesheet" />
+    <link href="../css/quiz.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="top">
+        <a class="highscore" href="">View high scores</a>
+        <p>Time: <span class="timer"></span></p>
+    </header>
+    <main>
+        <section class="container">
+
+            <div class="question-container">
+                <h3 id="question"></h3>
+            </div>
+
+            <div class="choice-container">
+                <p>1. <span id="choice1" data-number="1"></span></p>
+                <p>2. <span id="choice2" data-number="2"></span></p>
+                <p>3. <span id="choice3" data-number="3"></span></p>
+                <p>4. <span id="choice4" data-number="4"></span></p>
+            </div>
+
+        </section>
+
+
+        <section class="result-container hide">
+            <hr class="solid">
+            <p class="result-text">ddd</p>
+        </section>
+
+        <section class="score-container hide">
+            <h3>All done!</h3>
+            <p>Your score is <span id="score"></span></p>
+        </section>
+
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="../js/quiz.js"></script>
+</body>
+
+</html>

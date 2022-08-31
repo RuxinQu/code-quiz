@@ -1,0 +1,71 @@
+:root{
+    --display-color: #7044A6;
+    --onclick-color: #9B5DE5;
+}
+
+html{
+    font-size: 16px;
+}
+
+a{
+    text-decoration: none;
+}
+/* --------------top header area---------------- */
+.top{
+    font-size: 1.2rem;
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top .highscore{
+    color: var(--display-color);
+}
+
+.top .highscore:hover{
+    color: var(--onclick-color);
+}
+.top .timer{
+    margin-right: 10px;
+}
+
+/* ---------------main section area------------------ */
+
+.container{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+}
+
+.container h2{
+    font-size: 3rem;
+}
+
+.container h3{
+    font-size: 2.5rem;
+}
+
+.container p{
+    font-size: 1.5rem;
+}
+
+.container a{
+    font-size: 1.5rem;
+    color: #fff;
+    
+}
+
+.container .btn{
+    background-color: var(--display-color);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.btn:hover{
+    background-color: var(--onclick-color);
+}
