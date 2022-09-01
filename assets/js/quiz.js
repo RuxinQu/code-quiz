@@ -28,46 +28,49 @@ $(document).ready(() => {
     ];
 
     let questionCount = 0;
-    let timeTotal = 76;
+    let timeTotal = 75;
     loadQAndA(questionCount);
 
 
-
     $('.choice-container p').on('click', (event) => {
-        checkAnswer(event);      
+        checkAnswer(event);
         if (questionCount < 4) {
             questionCount++;
-            loadQAndA(questionCount);
+            setTimeout(() => {
+                hideResult();
+                loadQAndA(questionCount);
+            }, 1000)
         } else {
-            stopTimer();      
+            stopTimer();
+            setTimeout(() => {
+                hideResult();
+                showScore();
+            }, 1000)
         }
     })
 
-    $('.timer').text(timeTotal)
     let timer = setInterval(() => {
         if (timeTotal > 0) {
-            timeTotal--;
             $('.timer').text(timeTotal);
+            timeTotal--;
         } else {
             stopTimer();
+            hideResult();
+            showScore();
         }
     }, 1000)
 
     const stopTimer = () => {
-        $('.container').addClass('hide');
-        $('.score-container').removeClass('hide').addClass('show');
-        $('#score').text(timeTotal);
         clearInterval(timer);
+        $('.timer').text(timeTotal);
     }
 
     function loadQAndA(questionCount) {
         $('#question').text(questions[questionCount].question);
         let choicesElArr = [$('#choice1'), $('#choice2'), $('#choice3'), $('#choice4')];
-
         for (let x = 0; x < choicesElArr.length; x++) {
             choicesElArr[x].text(questions[questionCount].choices[x])
         }
-
     }
 
     const checkAnswer = (event) => {
@@ -84,7 +87,14 @@ $(document).ready(() => {
     const showResult = () => {
         $('.result-container').addClass('show').removeClass('hide');
     }
+
     const hideResult = () => {
         $('.result-container').addClass('hide').removeClass('show');
+    }
+
+    const showScore = () => {
+        $('.container').addClass('hide');
+        $('.score-container').removeClass('hide').addClass('show');
+        $('#score').text(timeTotal);
     }
 })
