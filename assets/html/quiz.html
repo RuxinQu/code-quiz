@@ -11,12 +11,12 @@
 
 <body>
     <header class="top">
-        <a class="highscore" href="">View high scores</a>
+        <a class="highscore" href="../html/score.html">View high scores</a>
         <p>Time: <span class="timer"></span></p>
     </header>
     <main>
+        <!-------- question and answer section ---------->
         <section class="container">
-
             <div class="question-container">
                 <h3 id="question"></h3>
             </div>
@@ -30,23 +30,25 @@
 
         </section>
 
-
+        <!----------------result section ---------------->
         <section class="result-container hide">
             <hr class="solid">
             <p class="result-text"></p>
         </section>
 
+        <!---------------- score section ----------------->
         <section class="score-container hide">
             <h3>All done!</h3>
             <p>Your final score is <span id="score"></span></p>
             <form>
                 <label>Enter initials:</label>
-                <input type="text" id="initial">
+                <input type="text" id="initial" placeholder="Enter your initial">
                 <button type="submit" class="btn" id="submit">Submit</button>
             </form>
         </section>
 
     </main>
+    
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"
         integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="../js/quiz.js"></script>

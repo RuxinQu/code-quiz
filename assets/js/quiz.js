@@ -27,26 +27,40 @@ $(document).ready(() => {
         }
     ];
 
+    let highScore = [];
     let questionCount = 0;
-    let timeTotal = 75;
+    let timeTotal = 5;
     loadQAndA(questionCount);
 
 
     $('.choice-container p').on('click', (event) => {
-        checkAnswer(event);
-        if (questionCount < 4) {
-            questionCount++;
-            setTimeout(() => {
-                hideResult();
-                loadQAndA(questionCount);
-            }, 1000)
-        } else {
-            stopTimer();
-            setTimeout(() => {
-                hideResult();
-                showScore();
-            }, 1000)
+        if ((event.target).matches('p')) {
+            checkAnswer(event);
+            if (questionCount < 4) {
+                questionCount++;
+                setTimeout(() => {
+                    hideResult();
+                    loadQAndA(questionCount);
+                }, 1000)
+            } else {
+                stopTimer();
+                setTimeout(() => {
+                    hideResult();
+                    showScore();
+                }, 1000)
+            }
         }
+    })
+
+    $('#submit').on('click', (event) => {
+        event.preventDefault();
+        if (!$('#initial').val()) {
+            alert('Please enter your initials')
+        } else {
+            saveHighScore();
+            window.location.assign('../html/score.html');
+        }
+
     })
 
     let timer = setInterval(() => {
@@ -75,13 +89,26 @@ $(document).ready(() => {
 
     const checkAnswer = (event) => {
         showResult()
-        console.log(questions[questionCount].answer)
         if (event.target.dataset.number == questions[questionCount].answer) {
             $('.result-text').text('Correct!')
         } else {
             $('.result-text').text('Wrong!')
             timeTotal = timeTotal - 10;
         }
+    }
+
+    const saveHighScore = () => {
+        const score = {
+            initial: $('#initial').val(),
+            score: timeTotal
+        };
+        highScore.push(score);
+
+        highScore.sort((a, b) => {
+            return b.score - a.score;
+        })
+        
+        localStorage.setItem('highScore', JSON.stringify(highScore)); 
     }
 
     const showResult = () => {

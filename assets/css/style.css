@@ -21,6 +21,7 @@ p{
 
 a{
     text-decoration: none;
+    color: #fff;
 }
 /* --------------top header area---------------- */
 .top{
@@ -65,3 +66,4 @@ a{
 .btn:hover{
     background-color: var(--onclick-color);
 }
+
