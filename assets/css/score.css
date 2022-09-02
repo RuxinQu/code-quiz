@@ -1,0 +1,15 @@
+.btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    padding: 5px;
+    font-size: 1.2rem;
+}
+
+li{
+    border-radius: 5px;
+    font-size: 2rem;
+    padding: 1rem;
+}
