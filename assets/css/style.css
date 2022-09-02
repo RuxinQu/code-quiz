@@ -55,15 +55,15 @@ a{
     margin: 0 auto;
 }
 
-.btn{
+.container a{
+    border-radius: 5px;
     font-size: 1.5rem;
     color: #fff;
-    background-color: var(--display-color);
     padding: 10px;
-    border-radius: 5px;
+    background-color: var(--display-color);
 }
 
-.btn:hover{
+.container a:hover{
     background-color: var(--onclick-color);
 }
 

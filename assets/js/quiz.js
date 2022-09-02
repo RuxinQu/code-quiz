@@ -27,9 +27,9 @@ $(document).ready(() => {
         }
     ];
 
-    let highScore = [];
+    let highScore = JSON.parse(localStorage.getItem('highScore'))|| [];
     let questionCount = 0;
-    let timeTotal = 5;
+    let timeTotal = 75;
     loadQAndA(questionCount);
 
 
