@@ -27,31 +27,36 @@ $(document).ready(() => {
         }
     ];
 
-
+    let click = 0;
     let questionCount = 0;
     loadQAndA(questionCount);
     // if highScore has data from local storage then get the local storage, if no data, it's an empty array.
     let highScore = JSON.parse(localStorage.getItem('highScore')) || [];
 
     $('.choice-container p').on('click', (event) => {
-        //when click on p elements with choices inside the div with class choice-container, first call a function to check if it matches the answer
-        checkAnswer(event);
-        // if there're still more questions to display, show next question after 1 seconds 
-        if (questionCount < 4) {
-            questionCount++;
-            setTimeout(() => {
-                hideResult();
-                loadQAndA(questionCount);
-            }, 1000)
-        // if no more question to display, stop the timer and show the final result
-        } else {
-            stopTimer();
-            setTimeout(() => {
-                hideResult();
-                showScore();
-            }, 1000)
+        click++;
+        // prevent continuous clicking causing the following questions not showing 
+        if (click < 2) {
+            //when click on p elements with choices inside the div with class choice-container, first call a function to check if it matches the answer
+            checkAnswer(event);
+            // if there're still more questions to display, show next question after 1 seconds 
+            if (questionCount < 4) {
+                questionCount++;
+                setTimeout(() => {
+                    hideResult();
+                    loadQAndA(questionCount);
+                    // after loding the next question, reset the click to 0
+                    click = 0;
+                }, 1000)
+                // if no more question to display, stop the timer and show the final result
+            } else {
+                stopTimer();
+                setTimeout(() => {
+                    hideResult();
+                    showScore();
+                }, 1000)
+            }
         }
-
     })
 
     $('#submit').on('click', (event) => {
@@ -105,7 +110,7 @@ $(document).ready(() => {
         }
     }
 
-     
+
     const saveHighScore = () => {
         // save each score as an object.
         const score = {
@@ -118,7 +123,7 @@ $(document).ready(() => {
         highScore.sort((a, b) => {
             return b.score - a.score;
         })
-        
+
         // save the object as a string
         localStorage.setItem('highScore', JSON.stringify(highScore));
     }
