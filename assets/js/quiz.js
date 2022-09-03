@@ -27,29 +27,31 @@ $(document).ready(() => {
         }
     ];
 
-    let highScore = JSON.parse(localStorage.getItem('highScore'))|| [];
-    let questionCount = 0;
-    let timeTotal = 75;
-    loadQAndA(questionCount);
 
+    let questionCount = 0;
+    loadQAndA(questionCount);
+    // if highScore has data from local storage then get the local storage, if no data, it's an empty array.
+    let highScore = JSON.parse(localStorage.getItem('highScore')) || [];
 
     $('.choice-container p').on('click', (event) => {
-        if ((event.target).matches('p')) {
-            checkAnswer(event);
-            if (questionCount < 4) {
-                questionCount++;
-                setTimeout(() => {
-                    hideResult();
-                    loadQAndA(questionCount);
-                }, 1000)
-            } else {
-                stopTimer();
-                setTimeout(() => {
-                    hideResult();
-                    showScore();
-                }, 1000)
-            }
+        //when click on p elements with choices inside the div with class choice-container, first call a function to check if it matches the answer
+        checkAnswer(event);
+        // if there're still more questions to display, show next question after 1 seconds 
+        if (questionCount < 4) {
+            questionCount++;
+            setTimeout(() => {
+                hideResult();
+                loadQAndA(questionCount);
+            }, 1000)
+        // if no more question to display, stop the timer and show the final result
+        } else {
+            stopTimer();
+            setTimeout(() => {
+                hideResult();
+                showScore();
+            }, 1000)
         }
+
     })
 
     $('#submit').on('click', (event) => {
@@ -57,12 +59,15 @@ $(document).ready(() => {
         if (!$('#initial').val()) {
             alert('Please enter your initials')
         } else {
+            // save the user initials to local storage and relocate the html to show the high score
             saveHighScore();
             window.location.assign('../html/score.html');
         }
 
     })
 
+    // total time is 75 seconds, show the time only when it's more than 0. If the timeTotal is equal to 0, stop the timer and show final score 0
+    let timeTotal = 75;
     let timer = setInterval(() => {
         if (timeTotal > 0) {
             $('.timer').text(timeTotal);
@@ -79,6 +84,7 @@ $(document).ready(() => {
         $('.timer').text(timeTotal);
     }
 
+    // load the questions and choices from the questions array
     function loadQAndA(questionCount) {
         $('#question').text(questions[questionCount].question);
         let choicesElArr = [$('#choice1'), $('#choice2'), $('#choice3'), $('#choice4')];
@@ -87,6 +93,8 @@ $(document).ready(() => {
         }
     }
 
+    /* check the clicked element's data-number. if the data-number matches the number saved in the questions array, 
+    the result shows correct, otherwise take 10 seconds from total time*/
     const checkAnswer = (event) => {
         showResult()
         if (event.target.dataset.number == questions[questionCount].answer) {
@@ -97,28 +105,34 @@ $(document).ready(() => {
         }
     }
 
+     
     const saveHighScore = () => {
+        // save each score as an object.
         const score = {
             initial: $('#initial').val(),
             score: timeTotal
         };
+        // push new score object to the highScore array
         highScore.push(score);
-
+        // sort the score with a descending order 
         highScore.sort((a, b) => {
             return b.score - a.score;
         })
         
-        localStorage.setItem('highScore', JSON.stringify(highScore)); 
+        // save the object as a string
+        localStorage.setItem('highScore', JSON.stringify(highScore));
     }
 
+    // show the result of 'right' or 'wrong' after user clicks one choice
     const showResult = () => {
         $('.result-container').addClass('show').removeClass('hide');
     }
-
+    // hide the result 
     const hideResult = () => {
         $('.result-container').addClass('hide').removeClass('show');
     }
 
+    // add/remove classes to the score and render to the page
     const showScore = () => {
         $('.container').addClass('hide');
         $('.score-container').removeClass('hide').addClass('show');
