@@ -105,11 +105,17 @@ $(document).ready(() => {
         if (event.target.dataset.number == questions[questionCount].answer) {
             $('.result-text').text('Correct!')
         } else {
-            $('.result-text').text('Wrong!')
+            let rightAnswer = getRightAnswer()
+            $('.result-text').text(`Wrong! The right answer is ${rightAnswer}`)
             timeTotal = timeTotal - 10;
         }
     }
 
+    // get the right answer from the questions array
+    const getRightAnswer = () => {
+        let rightIndex = questions[questionCount].answer;
+        return questions[questionCount].choices[rightIndex]
+    }
 
     const saveHighScore = () => {
         // save each score as an object.

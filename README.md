@@ -12,10 +12,10 @@ View the deployed website:
 ## Usage
 
 * When a user clicks on the 'Start Quiz' button, a quiz page will be shown. 
-* A message of 'Correct' or 'Wrong' will show in the bottom when a choice is clicked. And then the next question will show up.
-* One question can only be answered **ONCE**, multiple clicks on the choices from the same question won't change anything.
+* A message of 'Correct' or 'Wrong' will show up when a choice is clicked.
+* One question can only be answered **ONCE**
 * When the questions have all been answered, or the time has run up, the user will see the score and enter the initials to save the score.
-* High score record can be accessed before starting the quiz, during the quiz displaying, and after submiting the initials.
+* High score record can be accessed before starting the quiz, during the question displaying and after submiting the initials.
 * The 'clear high score' button will remove all the local high score records.
 * The 'go back' button will relocate the window to start quiz page.
 * The animation below shows the web application's appearance and functionality:
