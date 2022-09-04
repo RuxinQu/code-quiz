@@ -17,12 +17,12 @@ $('document').ready(() => {
     $('#clear').on('click', (event) => {
         event.preventDefault();
         localStorage.clear();
-        $('#high-score').text('');
+        window.location.reload();
     })
 
     // when click on the go back button the page will relocate to the start page
     $('#start').on('click', (event) => {
-        event.preventDefault();  
+        event.preventDefault();
         window.location.assign('../../index.html');
     })
 
